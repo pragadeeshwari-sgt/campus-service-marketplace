@@ -1,18 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+6xmport { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import Services from "./pages/Services";
-import ServiceDetails from "./pages/ServiceDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import CreateService from "./pages/CreateService";
 function App() {
   return (
     <BrowserRouter>
@@ -22,18 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route
-  path="/create-service"
-  element={<CreateService />}
-/>
         </Routes>
-
-        <Footer />
       </div>
     </BrowserRouter>
   );

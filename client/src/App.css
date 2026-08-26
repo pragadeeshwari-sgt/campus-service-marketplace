@@ -1430,3 +1430,151 @@ body {
     padding: 60px 20px;
   }
 }
+.footer {
+  margin-top: auto;
+  padding: 28px 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .footer {
+    padding: 24px 20px;
+  }
+}
+.profile-page {
+  max-width: 1000px;
+  min-height: 75vh;
+  margin: 0 auto;
+  padding: 90px 32px;
+}
+
+.profile-page h1 {
+  margin-top: 12px;
+  font-size: clamp(48px, 7vw, 82px);
+  line-height: 0.95;
+  letter-spacing: -4px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  margin-top: 50px;
+  padding: 32px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.profile-avatar {
+  width: 72px;
+  height: 72px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--dark);
+  color: white;
+
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.profile-info h2 {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+
+.profile-info p {
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .profile-page {
+    padding: 60px 20px;
+  }
+
+  .profile-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+.create-service-page {
+  min-height: 80vh;
+  padding-bottom: 100px;
+}
+
+.create-service-header {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 90px 32px 50px;
+}
+
+.create-service-header h1 {
+  margin-top: 12px;
+  font-size: clamp(52px, 7vw, 90px);
+  line-height: 0.95;
+  letter-spacing: -4px;
+}
+
+.create-service-header p:last-child {
+  margin-top: 22px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.create-service-card {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 36px 32px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.service-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.service-form select,
+.service-form textarea {
+  width: 100%;
+  padding: 13px 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  font: inherit;
+}
+
+.service-form select:focus,
+.service-form textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+@media (max-width: 700px) {
+  .create-service-header {
+    padding: 60px 20px 40px;
+  }
+
+  .create-service-card {
+    margin: 0 20px;
+    padding: 26px 20px;
+  }
+}
