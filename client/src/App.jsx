@@ -13,6 +13,9 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import CreateService from "./pages/CreateService";
+import MyRequests from "./pages/MyRequests";
+import MyServices from "./pages/MyServices";
+
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +33,15 @@ function App() {
           <Route
   path="/create-service"
   element={<CreateService />}
+/>
+<Route
+  path="/dashboard/requests"
+  element={<MyRequests />}
+/>
+
+<Route
+  path="/dashboard/services"
+  element={<MyServices />}
 />
         </Routes>
 
