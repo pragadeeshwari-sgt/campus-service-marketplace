@@ -5,10 +5,12 @@ const pool = require("./db");
 const authRoutes = require("./routes/authRoutes");
 const app = express();
 const serviceRoutes = require("./routes/serviceRoutes");
+const requestRoutes = require("./routes/requestRoutes");
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/services", serviceRoutes);
+app.use("/api/requests", requestRoutes);
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,

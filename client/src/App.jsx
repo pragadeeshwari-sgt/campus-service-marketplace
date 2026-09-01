@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import CreateService from "./pages/CreateService";
 import MyRequests from "./pages/MyRequests";
 import MyServices from "./pages/MyServices";
+import ProviderRequests from "./pages/ProviderRequests";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
   path="/dashboard/services"
   element={<MyServices />}
 />
+<Route path="/dashboard/provider-requests" element={<ProviderRequests />} />
         </Routes>
 
         <Footer />

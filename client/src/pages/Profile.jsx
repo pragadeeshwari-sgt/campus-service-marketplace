@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { getStoredUser } from "../lib/api";
 
 function Profile() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getStoredUser();
 
   if (!user) {
     return (

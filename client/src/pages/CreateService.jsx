@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { apiFetch, getStoredUser } from "../lib/api";
 
 function CreateService() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function CreateService() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getStoredUser();
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -30,9 +31,7 @@ function CreateService() {
 
     setError("");
 
-    const currentUser = JSON.parse(
-      localStorage.getItem("user")
-    );
+    const currentUser = getStoredUser();
 
     if (!currentUser?.id) {
       setError("Please log in before creating a service.");
@@ -42,41 +41,13 @@ function CreateService() {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/services",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            provider_id: currentUser.id,
-            title: formData.title.trim(),
-            description: formData.description.trim(),
-            category: formData.category,
-            price: Number(formData.price),
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(
-          data.message || "Unable to create service."
-        );
-        return;
-      }
+      await apiFetch("/services", { method: "POST", body: JSON.stringify({ title: formData.title.trim(), description: formData.description.trim(), category: formData.category, price: Number(formData.price) }) });
 
       navigate("/services");
     } catch (error) {
       console.error("Create service error:", error);
 
-      setError(
-        "Unable to connect to the server. Please try again."
-      );
+      setError(error.message || "Unable to connect to the server. Please try again.");
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { getStoredUser } from "../lib/api";
 
 function Dashboard() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getStoredUser();
 
   return (
     <main className="dashboard-page page-dashboard">
@@ -115,6 +116,13 @@ function Dashboard() {
           <strong>
             Manage services →
           </strong>
+        </Link>
+
+        <Link to="/dashboard/provider-requests" className="dashboard-card">
+          <span>05</span>
+          <h2>Provider Requests</h2>
+          <p>Respond to people requesting the services you offer.</p>
+          <strong>Manage requests →</strong>
         </Link>
 
       </section>
