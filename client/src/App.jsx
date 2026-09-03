@@ -16,6 +16,9 @@ import CreateService from "./pages/CreateService";
 import MyRequests from "./pages/MyRequests";
 import MyServices from "./pages/MyServices";
 import ProviderRequests from "./pages/ProviderRequests";
+import Categories from "./pages/Categories";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -27,24 +30,23 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
-          <Route
-  path="/create-service"
-  element={<CreateService />}
-/>
-<Route
-  path="/dashboard/requests"
-  element={<MyRequests />}
-/>
+          <Route path="/create-service" element={<CreateService />} />
+          
+          <Route path="/dashboard/requests" element={<MyRequests />} />
+          <Route path="/my-requests" element={<MyRequests />} />
+          
+          <Route path="/dashboard/services" element={<MyServices />} />
+          <Route path="/my-services" element={<MyServices />} />
 
-<Route
-  path="/dashboard/services"
-  element={<MyServices />}
-/>
-<Route path="/dashboard/provider-requests" element={<ProviderRequests />} />
+          <Route path="/dashboard/provider-requests" element={<ProviderRequests />} />
+          <Route path="/provider-requests" element={<ProviderRequests />} />
         </Routes>
 
         <Footer />

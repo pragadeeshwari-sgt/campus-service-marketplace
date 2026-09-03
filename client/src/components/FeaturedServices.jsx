@@ -1,84 +1,71 @@
-const services = [
-  {
-    category: "DESIGN",
-    title: "Graphic Design",
-    description: "Posters, presentations and social media designs.",
-    rating: "4.9",
-    reviews: "24",
-    price: "₹300",
-    provider: "Ananya R.",
-  },
-  {
-    category: "TUTORING",
-    title: "Calculus Tutoring",
-    description: "One-on-one help with calculus and engineering maths.",
-    rating: "4.8",
-    reviews: "18",
-    price: "₹200",
-    provider: "Rahul K.",
-  },
-  {
-    category: "TECHNOLOGY",
-    title: "React Development",
-    description: "Frontend development help for projects and websites.",
-    rating: "5.0",
-    reviews: "12",
-    price: "₹500",
-    provider: "Arjun S.",
-  },
-];
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { apiFetch } from "../lib/api";
+import { ArrowRightIcon, StarIcon } from "./Icons";
 
 function FeaturedServices() {
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiFetch("/services")
+      .then((data) => setServices((data.services || []).slice(0, 6)))
+      .catch(() => setServices([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (!loading && !services.length) return null;
+
   return (
     <section className="featured-section">
-      <div className="featured-header">
-        <div>
-          <p className="section-eyebrow">DISCOVER SERVICES</p>
-
-          <h2>Popular right now.</h2>
+      <div className="featured-container">
+        <div className="section-heading" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+          <div>
+            <p className="section-eyebrow">FEATURED LISTINGS</p>
+            <h2>Popular Services On Campus</h2>
+          </div>
+          <Link to="/services" className="secondary-button">
+            View All Services <ArrowRightIcon />
+          </Link>
         </div>
 
-        <button className="view-all">
-          View all →
-        </button>
-      </div>
+        <div className="service-grid">
+          {loading
+            ? Array.from({ length: 3 }).map((_, idx) => (
+                <div className="service-card" key={idx} style={{ opacity: 0.6, minHeight: 240 }}>
+                  <div style={{ height: 20, width: 80, background: 'var(--border-color)', borderRadius: 4, marginBottom: 16 }} />
+                  <div style={{ height: 24, width: '80%', background: 'var(--border-color)', borderRadius: 4, marginBottom: 12 }} />
+                  <div style={{ height: 48, width: '100%', background: 'var(--border-color)', borderRadius: 4 }} />
+                </div>
+              ))
+            : services.map((service) => (
+                <article className="service-card" key={service.id}>
+                  <div>
+                    <div className="service-card-header">
+                      <span className="category-tag">{service.category}</span>
+                      <span className="service-price-tag">₹{service.price}</span>
+                    </div>
+                    <h3>{service.title}</h3>
+                    <p className="service-description">{service.description}</p>
+                  </div>
 
-      <div className="services-grid">
-        {services.map((service) => (
-          <article className="service-card" key={service.title}>
-            <div className="service-card-top">
-              <span className="service-category">
-                {service.category}
-              </span>
-
-              <span className="service-rating">
-                ★ {service.rating}
-              </span>
-            </div>
-
-            <div className="service-card-content">
-              <h3>{service.title}</h3>
-
-              <p>{service.description}</p>
-            </div>
-
-            <div className="service-card-bottom">
-              <div>
-                <span className="service-price">
-                  {service.price}
-                </span>
-
-                <span className="service-provider">
-                  by {service.provider}
-                </span>
-              </div>
-
-              <button className="service-arrow">
-                →
-              </button>
-            </div>
-          </article>
-        ))}
+                  <div className="service-card-footer">
+                    <div className="provider-info">
+                      <div className="provider-avatar-circle">
+                        {service.provider_name?.charAt(0).toUpperCase() || "P"}
+                      </div>
+                      <div className="provider-details">
+                        <h5>{service.provider_name}</h5>
+                        <p>{service.campus || "Campus Community"}</p>
+                      </div>
+                    </div>
+                    <Link to={`/services/${service.id}`} className="primary-button" style={{ padding: '8px 14px', fontSize: 13, minHeight: 36 }}>
+                      View Service →
+                    </Link>
+                  </div>
+                </article>
+              ))}
+        </div>
       </div>
     </section>
   );

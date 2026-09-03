@@ -1,14 +1,43 @@
-import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Hero from "../components/Hero";
+import HowItWorks from "../components/HowItWorks";
+import FeaturedServices from "../components/FeaturedServices";
+import { CategoryIcon, ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from "../components/Icons";
+
+const categories = [
+  {
+    name: "Tutoring",
+    description: "Learn 1-on-1 from top performing students in STEM, Humanities, and Business.",
+  },
+  {
+    name: "Graphic Design",
+    description: "Custom event posters, club branding, slide pitch decks, and digital visuals.",
+  },
+  {
+    name: "Photography",
+    description: "High quality portraits, event coverage, graduation shoots, and video snippets.",
+  },
+  {
+    name: "Video Editing",
+    description: "Polished short-form reels, project demos, interviews, and vlog edits.",
+  },
+  {
+    name: "Writing",
+    description: "Proofreading, resume review, essay feedback, and creative copywriting.",
+  },
+  {
+    name: "Event Assistance",
+    description: "Reliable student helpers for venue setup, ticketing, tech, and operations.",
+  },
+];
+
 function Home() {
-      const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     if (location.hash) {
-      const element = document.getElementById(
-        location.hash.substring(1)
-      );
-
+      const element = document.getElementById(location.hash.substring(1));
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({
@@ -19,224 +48,65 @@ function Home() {
       }
     }
   }, [location.hash]);
-  const categories = [
-    {
-      number: "01",
-      name: "Tutoring",
-      description: "Learn from students who know the subject.",
-    },
-    {
-      number: "02",
-      name: "Graphic Design",
-      description: "Posters, presentations and creative visuals.",
-    },
-    {
-      number: "03",
-      name: "Photography",
-      description: "Capture your campus moments and events.",
-    },
-    {
-      number: "04",
-      name: "Video Editing",
-      description: "Turn your footage into polished content.",
-    },
-    {
-      number: "05",
-      name: "Writing",
-      description: "Get help with writing, editing and content.",
-    },
-    {
-      number: "06",
-      name: "Event Assistance",
-      description: "Find people to help make your events happen.",
-    },
-  ];
 
   return (
-    <main className="page-home home-page">
-
+    <main className="page-home">
       {/* HERO */}
-
-      <section className="home-hero">
-        <div className="hero-content">
-          <p className="section-eyebrow">
-            CAMPUS SERVICE MARKETPLACE
-          </p>
-
-          <h1>
-            Skills worth
-            <br />
-            <span>sharing.</span>
-          </h1>
-
-          <p className="hero-description">
-            A trusted marketplace where students can
-            discover useful services, share their skills,
-            and connect with people on campus.
-          </p>
-
-          <div className="hero-actions">
-            <Link
-              to="/services"
-              className="primary-button"
-            >
-              Explore services →
-            </Link>
-
-            <Link
-              to="/create-service"
-              className="secondary-button"
-            >
-              Offer a service
-            </Link>
-          </div>
-        </div>
-
-        <div className="hero-note">
-          <span>BUILT FOR STUDENTS</span>
-          <span>CAMPUS COMMUNITY</span>
-        </div>
-      </section>
-
+      <Hero />
 
       {/* HOW IT WORKS */}
+      <HowItWorks />
 
-      <section
-  className="how-section"
-  id="how-it-works"
->
-        <div className="section-heading">
-          <p className="section-eyebrow">
-            HOW IT WORKS
-          </p>
-
-          <h2>
-            Simple by design.
-          </h2>
-        </div>
-
-        <div className="steps-grid">
-
-          <article className="step-card">
-            <span>01</span>
-
-            <h3>Discover</h3>
-
-            <p>
-              Browse services offered by talented
-              students around your campus.
-            </p>
-          </article>
-
-          <article className="step-card">
-            <span>02</span>
-
-            <h3>Connect</h3>
-
-            <p>
-              Find the right person and request
-              the service you need.
-            </p>
-          </article>
-
-          <article className="step-card">
-            <span>03</span>
-
-            <h3>Complete</h3>
-
-            <p>
-              Get your work done and build trust
-              through reviews and ratings.
-            </p>
-          </article>
-
-        </div>
-      </section>
-
-
-      {/* CATEGORIES */}
-
-      <section className="categories-section">
-
-        <div className="section-heading categories-heading"
-        id="categories"
-        >
+      {/* CATEGORIES SECTION */}
+      <section className="categories-section" id="categories">
+        <div className="categories-header-row">
           <div>
-            <p className="section-eyebrow">
-              EXPLORE BY CATEGORY
-            </p>
-
-            <h2>
-              Something for everyone.
-            </h2>
+            <p className="section-eyebrow">EXPLORE BY CATEGORY</p>
+            <h2>Find What You Need On Campus</h2>
           </div>
-
-          <Link
-            to="/services"
-            className="text-link"
-          >
-            View all services →
+          <Link to="/categories" className="secondary-button">
+            View All Categories <ArrowRightIcon />
           </Link>
         </div>
 
         <div className="category-grid">
-
           {categories.map((category) => (
             <Link
               to={`/services?category=${encodeURIComponent(category.name)}`}
               className="category-card"
               key={category.name}
             >
-              <span className="category-number">
-                {category.number}
-              </span>
-
               <div>
+                <div className="category-card-top">
+                  <div className="category-icon-box">
+                    <CategoryIcon name={category.name} />
+                  </div>
+                  <ArrowUpRightIcon className="category-arrow-icon" />
+                </div>
                 <h3>{category.name}</h3>
-
-                <p>
-                  {category.description}
-                </p>
+                <p>{category.description}</p>
               </div>
-
-              <span className="category-arrow">
-                ↗
-              </span>
             </Link>
           ))}
-
         </div>
       </section>
 
+      {/* FEATURED SERVICES */}
+      <FeaturedServices />
 
-      {/* CTA */}
-
+      {/* CALL TO ACTION */}
       <section className="home-cta">
-
-        <p className="section-eyebrow">
-          YOUR SKILLS HAVE VALUE
-        </p>
-
-        <h2>
-          Have something
-          <br />
-          to offer?
-        </h2>
-
-        <p>
-          Turn your skills into something useful
-          for your campus community.
-        </p>
-
-        <Link
-          to="/create-service"
-          className="cta-button"
-        >
-          Offer a service →
-        </Link>
-
+        <div className="home-cta-inner">
+          <p className="section-eyebrow">MONETIZE YOUR SKILLS</p>
+          <h2>Have a Skill to Share?</h2>
+          <p>
+            Join hundreds of students earning income and helping peers across campus. List your services in less than two minutes.
+          </p>
+          <Link to="/create-service" className="offer-service-btn" style={{ padding: '14px 28px', fontSize: 16 }}>
+            <PlusIcon /> Offer a Service Now
+          </Link>
+        </div>
       </section>
-
     </main>
   );
 }

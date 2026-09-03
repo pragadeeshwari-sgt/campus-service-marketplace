@@ -16,3 +16,9 @@ the command. PostgreSQL will prompt for the database password when needed.
 The migration is transactional. If a statement fails, the transaction is not
 committed. Do not run this initial migration against a database that already
 contains these tables.
+
+For an existing marketplace database, apply the follow-up migrations in order.
+`003_password_resets_and_demo_services.sql` creates secure password-reset token
+storage and inserts idempotent demonstration service listings. It is safe to run
+once after either existing schema migration; it does not alter or duplicate
+existing services.

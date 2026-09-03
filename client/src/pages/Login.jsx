@@ -14,7 +14,6 @@ function Login() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-
     setFormData({
       ...formData,
       [name]: value,
@@ -23,26 +22,22 @@ function Login() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     setError("");
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message);
+        setError(data.message || "Invalid credentials. Please try again.");
         return;
       }
 
@@ -52,10 +47,7 @@ function Login() {
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
-
-      setError(
-        "Unable to connect to the server. Please try again."
-      );
+      setError("Unable to connect to the server. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -65,20 +57,14 @@ function Login() {
     <main className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <p className="section-eyebrow">WELCOME BACK</p>
-
-          <h1>Log in to CampusMarket.</h1>
-
-          <p>
-            Access your services, requests, and campus
-            connections.
-          </p>
+          <p className="section-eyebrow" style={{ justifyContent: 'center' }}>WELCOME BACK</p>
+          <h1>Log in to CampusMarket</h1>
+          <p>Access your services, manage requests, and connect with peers.</p>
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
-
             <input
               id="email"
               name="email"
@@ -91,8 +77,12 @@ function Login() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <label htmlFor="password">Password</label>
+              <Link to="/forgot-password" className="forgot-password-link">
+                Forgot password?
+              </Link>
+            </div>
             <input
               id="password"
               name="password"
@@ -104,18 +94,10 @@ function Login() {
             />
           </div>
 
-          {error && (
-            <p className="form-error">
-              {error}
-            </p>
-          )}
+          {error && <div className="form-error">{error}</div>}
 
-          <button
-            type="submit"
-            className="auth-submit"
-            disabled={loading}
-          >
-            {loading ? "Logging in..." : "Log in"}
+          <button type="submit" className="auth-submit" disabled={loading}>
+            {loading ? "Logging in..." : "Log in to Account"}
           </button>
         </form>
 
@@ -123,8 +105,8 @@ function Login() {
           <span>New to CampusMarket?</span>
         </div>
 
-        <Link to="/register" className="auth-secondary">
-          Create an account
+        <Link to="/register" className="auth-secondary-btn">
+          Create a Student Account
         </Link>
       </div>
     </main>

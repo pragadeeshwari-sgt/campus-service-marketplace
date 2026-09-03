@@ -1,54 +1,49 @@
+import React from "react";
+import { SearchIcon, UserIcon, CheckCircleIcon } from "./Icons";
+
 function HowItWorks() {
-  const steps = [
-    {
-      number: "01",
-      title: "Find a service",
-      description:
-        "Browse services offered by students on your campus and find what you need.",
-    },
-    {
-      number: "02",
-      title: "Send a request",
-      description:
-        "Choose a provider, share what you need, and send a service request.",
-    },
-    {
-      number: "03",
-      title: "Get it done",
-      description:
-        "Track your request from acceptance to completion and leave a review.",
-    },
-  ];
-
   return (
-    <section className="how-section">
-      <div className="how-header">
-        <p className="section-eyebrow">SIMPLE BY DESIGN</p>
+    <section className="how-section" id="how-it-works">
+      <div className="how-container">
+        <div className="section-heading" style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 48px' }}>
+          <p className="section-eyebrow">SIMPLE & SECURE PROCESS</p>
+          <h2>How CampusMarket Works</h2>
+          <p style={{ color: '#94a3b8', fontSize: 16, marginTop: 12 }}>
+            Whether you need help with assignments, event creative assets, or practical support, getting started takes less than a minute.
+          </p>
+        </div>
 
-        <h2>
-          From request
-          <br />
-          <span>to done.</span>
-        </h2>
+        <div className="steps-grid">
+          <article className="step-card">
+            <div className="step-number-badge">
+              <SearchIcon style={{ width: 22, height: 22 }} />
+            </div>
+            <h3>1. Discover Services</h3>
+            <p>
+              Browse categorized listings offered by verified students across your campus. Filter by category, price, or search for specific skills.
+            </p>
+          </article>
 
-        <p>
-          Everything you need to connect with skilled students
-          and get things done on campus.
-        </p>
-      </div>
+          <article className="step-card">
+            <div className="step-number-badge">
+              <UserIcon style={{ width: 22, height: 22 }} />
+            </div>
+            <h3>2. Connect & Request</h3>
+            <p>
+              Send service requests directly to student providers. Communicate details, schedule completion times, and agree on expectations.
+            </p>
+          </article>
 
-      <div className="steps-grid">
-        {steps.map((step) => (
-          <div className="step" key={step.number}>
-            <span className="step-number">{step.number}</span>
-
-            <div className="step-line" />
-
-            <h3>{step.title}</h3>
-
-            <p>{step.description}</p>
-          </div>
-        ))}
+          <article className="step-card">
+            <div className="step-number-badge">
+              <CheckCircleIcon style={{ width: 22, height: 22 }} />
+            </div>
+            <h3>3. Complete & Rate</h3>
+            <p>
+              Get your work delivered with quality and peace of mind. Build your campus reputation and leave helpful community reviews.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
   );
